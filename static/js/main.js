@@ -29,8 +29,16 @@ function populateQuizForm() {
 
 }
 
-function submitAnswers() {
+function submitTheAnswers() {
+	var stringArray = [
+		"You are quite an emotional individual.",
+		"Interesting...",
+		"Finding perfect love match now......."
+	];
+	var randNum = Math.floor(Math.random()*stringArray.length);
+	var theString = stringArray[randNum];
 
+	document.getElementById("textback").innerHTML = theString;
 }
 
 
