@@ -9,21 +9,55 @@
         <link href="static/css/main.css" rel="stylesheet">
 
         <!-- JS and JQuery -->
-	<script src="static/js/main.js"></script>        
-	<script src="static/js/jquery-3.2.1.min.js"></script>
+	    <script src="static/js/main.js"></script>
+	    <script src="static/js/jquery-3.2.1.min.js"></script>
         <script src="static/js/bootstrap.min.js"></script>
 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
-    <body>
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                        <img alt="C S 260" src="">
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <body onload="populateQuiz()">
+        <!-- Quiz Images/Choices -->
         <div class="container">
-          
+            <div class="row" id="answers">
+            </div>
         </div>
-	<button onclick="submitTheAnswers()">Submit Answers</button>
+        <!-- Quiz Question and Submit button -->
+        <div class="container well">
+            <div class="row" id="question">
+                <p class="text-center">This is where the question could go?</p>
+            </div>
+            <div class="row" id="choices">
+                <div class="radio">
+                    <label><input type="radio" name="optradio">Option 1</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="optradio">Option 2</label>
+                </div>
+                <div class="radio disabled">
+                    <label><input type="radio" name="optradio" disabled>Option 3</label>
+                </div>
 
-	<div class="container">
-
-	<p id="textback"></p>
-
-	</div>
+            </div>
+            <div class="row text-center">
+                <button class="btn-primary" onclick="submitTheAnswers()">Submit Answers</button>
+            </div>
+        </div>
+        <!-- Quiz Results -->
+        <div class="container">
+            <div class="row">
+                <p id="textback"></p>
+            </div>
+	    </div>
     </body>
 </html>
