@@ -37,15 +37,37 @@ function populateQuiz() {
     var choicesDiv = document.getElementById("choices");
 
     // Get a 'random' question
-    var question = getRandomQuestion();
-    console.log(question);
+    var q = getRandomQuestion();
+    console.log(q.question);
+    var question = document.createElement("p");
+    question.className = "text-center";
+    question.textContent = q.question;
+    questionDiv.appendChild(question);
 
     // Iterate over the choices for the question.
-    for (var c in question.choices) {
-        if (question.choices.hasOwnProperty(c)) {
+    var choices = q.choices;
+    for (var c in choices) {
+        if (choices.hasOwnProperty(c)) {
+
+            var newChoiceDiv = document.createElement("div");
+            newChoiceDiv.className = "radio";
+
+            var newChoiceLabel = document.createElement("label");
+            //newChoiceLabel.textContent = "Option " + c.toUpperCase();
+
+            newChoiceLabel.className = "radio";
+            var newChoiceInput = document.createElement("input");
+            newChoiceInput.type = "radio";
+            newChoiceInput.name = "optradio";
+
+            newChoiceLabel.appendChild(newChoiceInput);
+            newChoiceLabel.append("Option " + c.toUpperCase());
+
+            newChoiceDiv.appendChild(newChoiceLabel);
+            choicesDiv.appendChild(newChoiceDiv);
 
             var newImg = document.createElement("img");
-            newImg.src = question.choices[c];
+            newImg.src = choices[c];
             newImg.alt = c;
 
             var newLink = document.createElement("a");
@@ -67,7 +89,7 @@ function populateQuiz() {
 
             answerDiv.appendChild(newDiv);
 
-            console.log(c + ":" + question.choices[c]);
+            console.log(c + ":" + choices[c]);
         }
     }
 
