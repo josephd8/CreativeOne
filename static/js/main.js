@@ -32,7 +32,7 @@ function getRandomQuestion() {
 
 function populateQuiz() {
 
-    var answerDiv = document.getElementById("answers");
+    var answerDiv = document.getElementById("choice-images");
     var questionDiv = document.getElementById("question");
     var choicesDiv = document.getElementById("choices");
 
