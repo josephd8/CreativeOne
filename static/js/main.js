@@ -3,8 +3,8 @@ const questions = [
         "question": "Which of these memes best describe how you feel watching BYU Football this year?",
         "choices": {
             "a": "https://media.giphy.com/media/do8MAY6CkoXsc/giphy.gif",
-	        "b": "https://media.giphy.com/media/3t7RAFhu75Wwg/giphy.gif",
-	        "c": "https://media.giphy.com/media/NWg7M1VlT101W/giphy.gif"
+            "b": "https://media.giphy.com/media/3t7RAFhu75Wwg/giphy.gif",
+            "c": "https://media.giphy.com/media/NWg7M1VlT101W/giphy.gif"
         }
     },
     {
@@ -25,19 +25,6 @@ const questions = [
     }
 ];
 
-function submitTheAnswers() {
-	var stringArray = [
-		"You are quite an emotional individual.",
-		"Interesting...",
-		"Finding perfect love match now......."
-	];
-	var randNum = Math.floor(Math.random()*stringArray.length);
-	var theString = stringArray[randNum];
-
-	document.getElementById("textback").innerHTML = theString;
-}
-
-// Just messing around
 const questionsV2 = [
     "Which of these memes best describe how you feel watching BYU Football this year?",
     "Which of these memes best describe how you felt when Donald Trump was elected as P.O.T.U.S.?",
@@ -49,6 +36,46 @@ const images = [
     "https://media.giphy.com/media/FEikw3bXVHdMk/giphy.gif", "https://media.giphy.com/media/3oz8xPPAvH1k8N6ZYA/giphy.gif", "https://media.giphy.com/media/l46Cv7xLYTFTYQza8/giphy.gif",
     "https://media.giphy.com/media/d31vNo8crBC91xF6/giphy.gif", "https://media.giphy.com/media/CPskAi4C6WLHa/giphy.gif", "https://media.giphy.com/media/12NUbkX6p4xOO4/giphy.gif"
 ];
+/*s
+const images = {
+    "positive": [],
+    "neutral": [],
+    "negative": []
+};*/
+
+var currQuestion = 0;
+var questionsAnswered = 0;
+
+function setQuestion() {
+    // get a random question
+    var question = questionsV2[currQuestion];
+    document.getElementById("question").innerHTML = '<p class="text-center">' + question + '</p>';
+}
+
+function submitTheAnswers() {
+    var stringArray = [
+        "You are quite an emotional individual.",
+        "Interesting...",
+        "Finding perfect love match now......."
+    ];
+    if (questionsAnswered == 2) {
+        var randNum = Math.floor(Math.random() * stringArray.length);
+        var theString = stringArray[randNum];
+        document.getElementById("textback").innerHTML = theString;
+        document.getElementById("submit-btn").textContent = "Finished!";
+        document.getElementById("new-images").disabled = true;
+        document.getElementById("submit-btn").disabled = true;
+    }
+    else {
+        console.log("submissions: " + questionsAnswered);
+        questionsAnswered++;
+        currQuestion++;
+        setQuestion();
+        setImages();
+    }
+
+
+}
 
 function randIdx(someList) {
     return Math.floor(Math.random() * someList.length);
@@ -76,12 +103,7 @@ function newImages() {
     }
 }
 
-function populateQuiz() {
-
-    // get a random question
-    var question = questionsV2[randIdx(questionsV2)];
-    document.getElementById("question").innerHTML = '<p class="text-center">' + question + '</p>';
-
+function setImages() {
     // get three random images to use
     // as the choices for above question.
     var imgList = images.slice();
@@ -108,7 +130,11 @@ function populateQuiz() {
     }
     document.getElementById("choice-images").innerHTML = imgHtml;
     document.getElementById("choices").innerHTML = radioHtml;
+}
 
+function populateQuiz() {
+    setQuestion();
+    setImages();
 }
 
 
